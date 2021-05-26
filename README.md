@@ -1,6 +1,5 @@
 # Light Sensor Using Arduino
-
-• Apart of a bigger system called ‘Smart Garden’.
+>• Apart of a bigger system called ‘Smart Garden’.
 • Analyze the amount of light needed for each plant. 
 • Cloud services that contains the information for 
 each plant, light exposure, and statistics.
