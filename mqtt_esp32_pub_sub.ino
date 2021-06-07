@@ -1,8 +1,8 @@
 /***************************************************
 
 SHENKAR - SMART SYSTEMS
-By: Ori Shinsholker & Michal Tamir & Osnat Blau
-DATE: May-2021
+By: Ori Shinsholker & Michal Tamir & Osnat Blau & Toval Barak & Deviad Bokobza
+DATE: Jun-2021
 
  ****************************************************/
 #include <WiFi.h>
@@ -23,7 +23,7 @@ DATE: May-2021
 #define AIO_SERVER      "io.adafruit.com"
 #define AIO_SERVERPORT  1883                   // use 8883 for SSL
 #define AIO_USERNAME  "oriki"
-#define AIO_KEY       "aio_cgdJ66llMusUac1w5DVIGOFpwuC3"
+#define AIO_KEY       "aio_ZrjP76q2fjYWgdwbHLCdXnuBSRto"
 
 /************************* Adafruit.io Setup *********************************/
 
@@ -33,9 +33,14 @@ DATE: May-2021
 #define LIGHT_PIN 33
 #define LED_RED 15
 #define LED_BLUE 12
+#define LED_WHITE 13
+#define trigPin 14    // Trigger
+#define echoPin 27  // Echo
+long duration, cm, inches;
 
 int sum_light_level=0;
 int i=0;
+int count=0;//counter 4 time dilay
 /***************************** Global Val **********************************/
 
 
@@ -57,7 +62,10 @@ Adafruit_MQTT_Client mqtt(&client, AIO_SERVER, AIO_SERVERPORT, AIO_USERNAME, AIO
 // Setup a feed called 'light-sensor' for publishing.
 // Notice MQTT paths for AIO follow the form: <username>/feeds/<feedname>
 
-Adafruit_MQTT_Publish light_level = Adafruit_MQTT_Publish(&mqtt,"oriki/feeds/light-sensor");
+Adafruit_MQTT_Publish light_level = Adafruit_MQTT_Publish(&mqtt,AIO_USERNAME "/feeds/light-sensor");
+Adafruit_MQTT_Publish distance_feed = Adafruit_MQTT_Publish(&mqtt,AIO_USERNAME "/feeds/distance-sensor");
+
+
 // Setup a feed called 'light-sensor' for subscribing to changes.
 Adafruit_MQTT_Subscribe light_level_read = Adafruit_MQTT_Subscribe(&mqtt,AIO_USERNAME "/feeds/light-sensor");
 
@@ -76,9 +84,19 @@ void MQTT_connect();
 
 void setup() {
     Serial.begin(115200);
+
+    //LEDs
     pinMode(LED_RED, OUTPUT); // RED
     pinMode(LED_BLUE, OUTPUT); // BLUE
+    pinMode(LED_WHITE, OUTPUT); // WHITE
 
+    
+
+    //Distance Sensor
+    pinMode(trigPin, OUTPUT);
+    pinMode(echoPin, INPUT);
+    
+    
     delay(1000);
     Serial.println(F("Starting..."));
     delay(1000);
@@ -112,14 +130,57 @@ void setup() {
 void loop() {
 // We must keep this for now
     MQTT_connect();
+    count++;
+    ///******************************** GET Distance Value ******************************
+      // The sensor is triggered by a HIGH pulse of 10 or more microseconds.
+  // Give a short LOW pulse beforehand to ensure a clean HIGH pulse:
+      digitalWrite(trigPin, LOW);
+      delayMicroseconds(5);
+      digitalWrite(trigPin, HIGH);
+      delayMicroseconds(10);
+      digitalWrite(trigPin, LOW);
+     
+      // Read the signal from the sensor: a HIGH pulse whose
+      // duration is the time (in microseconds) from the sending
+      // of the ping to the reception of its echo off of an object.
+      pinMode(echoPin, INPUT);
+      duration = pulseIn(echoPin, HIGH);
+     
+      // Convert the time into a distance
+      cm = (duration/2) / 29.1;     // Divide by 29.1 or multiply by 0.0343
+      
+      Serial.print(cm);
+      Serial.print("cm");
+      Serial.println();
+
+      ///******************************** GET Distance Value ******************************
 
 
+
+    //********************************* Send parameter to adafruit **************************
+
+
+    // Now we can publish stuff!
+    Serial.print(F("\nSending Distance value =>"));
+    Serial.print(cm);
+    Serial.print("...");
+  if (cm>=0 && cm<=1000)
+    if (!distance_feed.publish((int)cm)) {
+        Serial.println(F("Failed"));
+    } else {
+        Serial.println(F("OK!"));
+    }
+
+    //********************************* Send parameter to adafruit **************************
+
+
+//if (count %5==0){
     //********************************* Send parameter to adafruit **************************
 
     val = analogRead(LIGHT_PIN); //read form photoresistor
 
     // Now we can publish stuff!
-    Serial.print(F("\nSending value =>"));
+    Serial.print(F("\nSending Light value =>"));
     Serial.print(val);
     Serial.print("...");
 
@@ -164,18 +225,20 @@ void loop() {
             Serial.println("Blue");
             digitalWrite(LED_RED, LOW);   // turn off the red LED on (HIGH is the voltage level)
             digitalWrite(LED_BLUE, HIGH);
+            digitalWrite(LED_WHITE,LOW);
         }
         else{
             Serial.println("RED");
             digitalWrite(LED_RED, HIGH);   // turn the red LED on (HIGH is the voltage level)
-            digitalWrite(LED_BLUE, LOW);
+            digitalWrite(LED_BLUE,LOW);
+              digitalWrite(LED_WHITE,HIGH);
         }
 
        //reset the value for new lastest values
         sum_light_level=0; 
         i=0;
     }
-
+//}
    //********************************* Read parameter to adafruit **************************
 
 
@@ -185,8 +248,8 @@ void loop() {
     if(! mqtt.ping()) {
         mqtt.disconnect();
     }
-        delay(60000);   //delay 60 seconds
-//        delay(1000);   //delay 2 seconds for testing
+//        delay(60000);   //delay 60 seconds
+        delay(400);   //delay 2 seconds for testing
 
 }
 
