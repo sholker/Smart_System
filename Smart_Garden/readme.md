@@ -1,7 +1,8 @@
 # Smart Garden Project
 ### Check the light and the humiditly garden
 
-![pic1]("media/pic1.jpg")
+
+<p align="center"><img src=media/pic1.jpg height="242"/></p>
 
 #### The Project is about:
 - Trun on blue light when there is enough brightness. Red light otherwese.
@@ -9,7 +10,7 @@
 - Trun on buzzer when somethin is too close to our plant.
 
 #### Hardware components
-• 2 x ESP32-PICO
+• 2 x ESP32-PICO<br>
 • 4 x LED – 2 x red, blue, white
 • 2 x Breadboard
 • Light Sensor
@@ -25,4 +26,5 @@
 [presentation](Smart%20Garden.pdf)
 
 
-![pic2](media/pic2.jpg)
+
+<p align="center"><img src=media/pic2.jpg height="242"/></p>
