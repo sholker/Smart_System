@@ -2,7 +2,7 @@
 ### Check the light and the humiditly garden
 
 
-<p align="center"><img src=media/pic1.jpg height="242"/></p>
+<p align="center"><img src=media/pic2.jpg height="242"/></p>
 
 #### The Project is about:
 - Trun on blue light when there is enough brightness. Red light otherwese.
@@ -27,4 +27,4 @@
 
 
 
-<p align="center"><img src=media/pic2.jpg height="242"/></p>
+<p align="center"><img src=media/pic1.jpg height="242"/></p>
