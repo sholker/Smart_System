@@ -30,10 +30,11 @@ DATE: Jun-2021
 
 /***************************** Global Val **********************************/
 
-#define LIGHT_PIN 33
-#define LED_RED 15
-#define LED_BLUE 12
-#define LED_WHITE 13
+#define LIGHT_PIN 33 //light sensor
+#define LED_RED 15 //led
+#define LED_BLUE 12 //led
+#define LED_WHITE 13 //led
+//distance sensor
 #define trigPin 14    // Trigger
 #define echoPin 27  // Echo
 long duration, cm, inches;
