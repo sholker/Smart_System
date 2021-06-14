@@ -7,7 +7,7 @@
 #### The Project is about:
 - Trun on blue light when there is enough brightness. Red light otherwese.
 - Turn on red light when there isnt enough humiditly.
-- Trun on buzzer when somethin is too close to our plant.
+- Trun on buzzer when something is too close to our plant.
 
 #### Hardware components
 • 2 x ESP32-PICO<br>
