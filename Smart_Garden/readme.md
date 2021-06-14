@@ -11,18 +11,18 @@
 
 #### Hardware components
 • 2 x ESP32-PICO<br>
-• 4 x LED – 2 x red, blue, white
-• 2 x Breadboard
-• Light Sensor
-• Speaker
-• Ultrasonic sensor
-• Moister sensor
-• USB cable
-• 2 x Resistor 210Ω
-• 4 x Resistor 10KΩ
+• 4 x LED – 2 x red, blue, white<br>
+• 2 x Breadboard<br>
+• Light Sensor<br>
+• Speaker<br>
+• Ultrasonic sensor<br>
+• Moister sensor<br>
+• USB cable<br>
+• 2 x Resistor 210Ω<br>
+• 4 x Resistor 10KΩ<br>
 
 
-[video]("ttps://photos.app.goo.gl/gBPTGnfGFqJaRyms9)
+[video](https://photos.app.goo.gl/gBPTGnfGFqJaRyms9)
 [presentation](Smart%20Garden.pdf)
 
 
