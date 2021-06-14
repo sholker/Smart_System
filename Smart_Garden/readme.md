@@ -29,3 +29,5 @@
 
 
 <p align="center"><img src=media/pic1.jpg height="242"/></p>
+
+> Created by: Deviad Bokobza, Tuval Bara, Michal Tamir, Osnat Blau and Ori Shinsholker
