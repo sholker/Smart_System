@@ -10,7 +10,7 @@ each plant, light exposure, and statistics.
 plant and turn on the light needed
 
 ### J2J
-<p align="center"><img src=light_level.jpeg height="242"/></p>
+<p align="center"><img src=../light_level.jpeg height="242"/></p>
 
 
 
