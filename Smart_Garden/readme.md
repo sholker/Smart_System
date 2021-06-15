@@ -22,7 +22,7 @@
 • 4 x Resistor 10KΩ<br>
 
 
-[show video for more information](https://photos.app.goo.gl/gBPTGnfGFqJaRyms9)
+[show video for more information](https://photos.app.goo.gl/vscDE7uCMQKuX46D8)
 <br>
 [presentation](Smart%20Garden.pdf)
 
